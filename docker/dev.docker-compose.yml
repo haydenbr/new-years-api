@@ -4,33 +4,31 @@ services:
     container_name: new-years-api
     image: haydenbr/new-years-api:0.0.0
     depends_on:
-      - new-years-api-mongo
+      - new-years-mongo
     volumes:
-      - ./src:/opt/app/src
-      - ./package.json:/opt/app/src
+      - ../src:/opt/app/src
+      - ../package.json:/opt/app/package.json
     networks:
       - new-years-api
     ports:
       - 3000:3000
+    environment:
+      - MONGO_URL=mongodb://new-years-mongo:27017/person-test
 
-  new-years-api-mongo:
-    container_name: new-years-api-mongo
-    image: mongo:3.6.4-jessie
+  new-years-mongo:
+    container_name: new-years-mongo
+    image: haydenbr/new-years-mongo
     volumes:
     - type: volume
-      source: new-years-api-mongo
+      source: new-years-mongo
       target: /data/db
-    - type: volume
-      source: new-years-api-mongo-config
-      target: /data/configdb
     networks:
       - new-years-api
     ports:
       - 27017:27017
 
 volumes:
-  new-years-api-mongo:
-  new-years-api-mongo-config:
+  new-years-mongo:
 
 networks:
   new-years-api:

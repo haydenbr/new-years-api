@@ -4,7 +4,8 @@
   "description": "Quick and dirty now. Make it nice later.",
   "license": "MIT",
   "scripts": {
-    "serve": "nodemon ./src/app.js"
+    "serve": "nodemon ./src/app.js",
+    "start": "docker-compose -f ./docker/dev.docker-compose.yml up"
   },
   "dependencies": {
     "body-parser": "^1.18.2",
