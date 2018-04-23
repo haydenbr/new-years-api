@@ -13,7 +13,7 @@ services:
     ports:
       - 3000:3000
     environment:
-      - MONGO_URL=mongodb://new-years-mongo:27017/person-test
+      - MONGO_URL=mongodb://new-years-mongo:27017/new-years-resolutions
 
   new-years-mongo:
     container_name: new-years-mongo

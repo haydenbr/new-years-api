@@ -1,7 +1,7 @@
-const registerPersonRoutes = require('./person').registerRoutes;
+const registerResolutionRoutes = require('./resolution').registerRoutes;
 
 function registerRoutes(app) {
-	registerPersonRoutes(app);
+	registerResolutionRoutes(app);
 }
 
 module.exports = registerRoutes;
