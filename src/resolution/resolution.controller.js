@@ -26,7 +26,7 @@ function put(req, res) {
   let id = req.params.id;
 
   return Resolution
-    .findOneByIdAndUpdate(id, req.body)
+    .findByIdAndUpdate(id, req.body)
     .then(() => get(req, res));
 };
 
@@ -43,7 +43,7 @@ function setComplete(req, res) {
   let id = req.params.id;
 
   return Resolution
-    .findOneByIdAndUpdate(id, { isComplete: true })
+    .findByIdAndUpdate(id, { isComplete: true })
     .then(() => res.send(202));
 }
 
@@ -51,7 +51,7 @@ function setIncomplete(req, res) {
   let id = req.params.id;
 
   return Resolution
-    .findOneByIdAndUpdate(id, { isComplete: false })
+    .findByIdAndUpdate(id, { isComplete: false })
     .then(() => res.send(202));
 }
 
