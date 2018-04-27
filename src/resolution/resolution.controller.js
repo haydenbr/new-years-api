@@ -3,8 +3,8 @@ const Resolution = require('./resolution.model');
 function getAll(req, res) {
   return Resolution
     .find()
-    .then((people) => res.send(people))
-    .catch(passTheBuck);
+    .sort({ createdAt: 1, order: -1 })
+    .then((people) => res.send(people));
 };
 
 function get(req, res) {
@@ -12,8 +12,7 @@ function get(req, res) {
 
   return Resolution
     .findOne({ _id: id })
-    .then((resolution) => res.send(resolution))
-    .catch(passTheBuck);
+    .then((resolution) => res.send(resolution));
 };
 
 function create(req, res) {
@@ -35,9 +34,18 @@ function remove(req, res) {
 
   return Resolution
     .remove({ _id: id })
-    .then(() => res.send(202))
-    .catch(passTheBuck);
+    .then(() => res.send(202));
 };
+
+function removeAll(req, res) {
+  return Resolution
+    .remove({})
+    .then(() => res.send(202));
+}
+
+function reorder(req, res) {
+  throw 'Not implemented';
+}
 
 function setComplete(req, res) {
   let id = req.params.id;
@@ -64,5 +72,7 @@ module.exports = {
   get,
   create,
   put,
-  remove
+  remove,
+  removeAll,
+  reorder
 };
