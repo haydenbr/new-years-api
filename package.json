@@ -5,6 +5,7 @@
     "license": "MIT",
     "repository": "https://github.com/haydenbr/new-years-api",
     "dockerHubRepository": "haydenbr/new-years-api",
+    "main": "./src/app.js",
     "scripts": {
         "start": "docker-compose -f ../docker-compose.dev.yml -f ./docker-compose.dev.yml up",
         "down": "docker-compose -f ../docker-compose.dev.yml -f ./docker-compose.dev.yml down",
@@ -14,7 +15,7 @@
         "major": "yarn bump major",
         "minor": "yarn bump minor",
         "patch": "yarn bump patch",
-        "serve": "nodemon ./src/app.js"
+        "serve": "nodemon --inspect=0.0.0.0:5858"
     },
     "dependencies": {
         "body-parser": "^1.18.2",

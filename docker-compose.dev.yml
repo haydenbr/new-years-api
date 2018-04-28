@@ -12,6 +12,7 @@ services:
       - new-years-api
     ports:
       - '3000:3000'
+      - '5858:5858'
     environment:
       - 'MONGO_URL=mongodb://new-years-mongo:27017/new-years-resolutions'
   new-years-mongo:
