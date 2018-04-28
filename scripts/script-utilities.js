@@ -1,7 +1,6 @@
 const childProcess = require('child_process');
 const fs = require('fs');
 const path = require('path');
-const xml2js = require('xml2js');
 const yaml = require('js-yaml');
 
 function bumpVersion(versionBump) {
@@ -11,10 +10,6 @@ function bumpVersion(versionBump) {
 	packageJson.version = newVersion;
 
 	return writeFile(path.resolve(__dirname, '..', 'package.json'), JSON.stringify(packageJson, null, 4));
-}
-
-function convertJsonToXml(data) {
-	return new xml2js.Builder().buildObject(data);
 }
 
 function convertYamlToJson(data) {
@@ -66,12 +61,6 @@ function getPackageJson() {
 	return require(path.resolve(__dirname, '..', 'package.json'));
 }
 
-function parseXmlString(data) {
-	return new Promise((resolve, reject) => {
-		new xml2js.Parser().parseString(data, (err, data) => (err ? reject(err) : resolve(data)));
-	});
-}
-
 function readFile(filepath) {
 	return new Promise((resolve, reject) => {
 		fs.readFile(filepath, (err, data) => (err ? reject(err) : resolve(data)));
@@ -103,7 +92,6 @@ function writeFile(filepath, data) {
 
 module.exports = {
 	bumpVersion,
-	convertJsonToXml,
 	convertJsonToYaml,
 	convertYamlToJson,
 	execFile,
@@ -112,9 +100,8 @@ module.exports = {
 	getDockerHubRepository,
 	getNextVersion,
 	getPackageJson,
-	parseXmlString,
 	readFile,
 	rename,
 	spawnPromise,
-	writeFile,
+	writeFile
 };
