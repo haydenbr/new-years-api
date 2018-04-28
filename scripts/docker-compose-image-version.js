@@ -6,8 +6,8 @@ function setComposeLatestImage() {
 	const image = `${util.getDockerHubRepository()}:latest`;
 
 	return getComposeData().then(dockerComposeConfig => {
-		dockerComposeConfig.services['new-years-client'].image = image;
-		dockerComposeConfig.services['new-years-client'].build = '.';
+		dockerComposeConfig.services['new-years-api'].image = image;
+		dockerComposeConfig.services['new-years-api'].build = '.';
 		return saveComposeData(dockerComposeConfig, image);
 	});
 }
@@ -16,8 +16,8 @@ function syncComposeImage() {
 	const image = util.getCurrentDockerImage();
 
 	return getComposeData().then(dockerComposeConfig => {
-		dockerComposeConfig.services['new-years-client'].image = image;
-		delete dockerComposeConfig.services['new-years-client'].build;
+		dockerComposeConfig.services['new-years-api'].image = image;
+		delete dockerComposeConfig.services['new-years-api'].build;
 		return saveComposeData(dockerComposeConfig, image);
 	});
 }
