@@ -6,8 +6,8 @@ services:
     depends_on:
       - new-years-mongo
     volumes:
-      - ../src:/opt/app/src
-      - ../package.json:/opt/app/package.json
+      - ./new-years-api/src:/opt/app/src
+      - ./new-years-api/package.json:/opt/app/package.json
     networks:
       - new-years-api
     ports:
@@ -29,6 +29,7 @@ services:
 
 volumes:
   new-years-mongo:
+    name: new-years-mongo
 
 networks:
   new-years-api:

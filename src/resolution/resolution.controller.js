@@ -43,8 +43,20 @@ function removeAll(req, res) {
     .then(() => res.send(202));
 }
 
+/*
+[
+  { id: string, order: Number },
+  { id: string, order: Number },
+  { id: string, order: Number },
+  { id: string, order: Number }
+]
+*/
 function reorder(req, res) {
-  throw 'Not implemented';
+  let reorderRequest = req.body.reorder;
+  let reorderPromises = reorderRequest.map((r) => Resolution.updateOne({ _id: r.id }, { order: r.order }));
+
+  return Promise.all(reorderPromises)
+    .then(() => res.send(202));
 }
 
 function setComplete(req, res) {

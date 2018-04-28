@@ -3,6 +3,10 @@ const AutoIncrement = require('mongoose-sequence')(mongoose);
 const Schema = mongoose.Schema;
 
 let milestoneSchema = new Schema({
+  _id: {
+    type: String,
+    alias: 'id'
+  },
   name: String,
   description: String,
   isComplete: {
@@ -35,20 +39,21 @@ let resolutionSchema = new Schema({
   order: Number
 });
 
-Array.of(resolutionSchema, milestoneSchema)
-  .forEach((schema) => validateSchemaFieldExists(schema, 'name'));
-
-function validateSchemaFieldExists(schema, field) {
-  schema.path(field).validate((value) => !!value, `${field} is a required field`);
-}
+resolutionSchema.path('name').validate((value) => !!value, 'name is a required field');
+milestoneSchema.path('name').validate((value) => !!value, 'name is a required field');
+resolutionSchema.set('toJSON', {
+  virtuals: true,
+  transform: (doc, returnValue) => {
+    delete returnValue._id;
+  }
+});
+milestoneSchema.set('toJSON', {
+  virtuals: true,
+  transform: (doc, returnValue) => {
+    delete returnValue._id;
+  }
+});
 
 resolutionSchema.plugin(AutoIncrement, { inc_field: 'order' });
 
 module.exports = mongoose.model('Resolution', resolutionSchema);
-
-// {
-//   "_id" : ObjectId("5ae27f8fb78674397fcd05a4"),
-//   "id" : "order",
-//   "reference_value" : null,
-//   "seq" : 3
-// }
