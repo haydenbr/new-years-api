@@ -2,34 +2,31 @@ version: '3.6'
 services:
   new-years-api:
     container_name: new-years-api
-    image: haydenbr/new-years-api:0.0.0
+    image: 'haydenbr/new-years-api:0.0.2-dev'
     depends_on:
       - new-years-mongo
     volumes:
-      - ./new-years-api/src:/opt/app/src
-      - ./new-years-api/package.json:/opt/app/package.json
+      - './new-years-api/src:/opt/app/src'
+      - './new-years-api/package.json:/opt/app/package.json'
     networks:
       - new-years-api
     ports:
-      - 3000:3000
+      - '3000:3000'
     environment:
-      - MONGO_URL=mongodb://new-years-mongo:27017/new-years-resolutions
-
+      - 'MONGO_URL=mongodb://new-years-mongo:27017/new-years-resolutions'
   new-years-mongo:
     container_name: new-years-mongo
     image: haydenbr/new-years-mongo
     volumes:
-    - type: volume
-      source: new-years-mongo
-      target: /data/db
+      - type: volume
+        source: new-years-mongo
+        target: /data/db
     networks:
       - new-years-api
     ports:
-      - 27017:27017
-
+      - '27017:27017'
 volumes:
   new-years-mongo:
     name: new-years-mongo
-
 networks:
-  new-years-api:
+  new-years-api: null
