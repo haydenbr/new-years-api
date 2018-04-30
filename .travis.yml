@@ -10,8 +10,7 @@ git:
 services:
   - docker
 
-install:
-  - echo "skipping install"
+install: skip
 
 script:
   - 'echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin'
