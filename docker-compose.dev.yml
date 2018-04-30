@@ -2,7 +2,7 @@ version: '3.6'
 services:
   new-years-api:
     container_name: new-years-api
-    image: 'haydenbr/new-years-api:0.1.1-dev'
+    image: 'haydenbr/new-years-api:0.2.0-dev'
     depends_on:
       - new-years-mongo
     volumes:
