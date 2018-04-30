@@ -6,8 +6,7 @@ ENV NODE_ENV=development
 RUN mkdir /opt/app
 WORKDIR /opt/app
 
-ADD docker/package.json package.json
-ADD yarn.lock yarn.lock
+COPY docker/package.json yarn.lock ./
 RUN yarn
 
 EXPOSE 3000
