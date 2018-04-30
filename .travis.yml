@@ -10,13 +10,10 @@ git:
 services:
   - docker
 
-before_install:
-  # - docker build -t carlad/sinatra .
-  - echo 'Bob is before install'
-
 install:
-  - echo 'Bob is installing'
 
 script:
-  - ./scripts/current-version.js
-  - echo 'Bob is running script'
+  - 'echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin'
+  - 'export VERSION=$(./scripts/current-version.js)'
+  - 'docker image build -f ./docker/prod.Dockerfile -t haydenbr/new-years-api:$VERSION .'
+  - 'docker image push haydenbr/new-years-api:$VERSION'
