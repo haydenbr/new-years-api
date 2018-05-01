@@ -6,7 +6,10 @@ const appConfig = {
 		db: process.env.MONGO_URL || 'mongodb://localhost:27017/new-years',
 		port: process.env.PORT || 3000
   },
-  production: {}
+  production: {
+		db: process.env.MONGO_URL || 'mongodb://localhost:27017/new-years',
+		port: process.env.PORT || 3000
+  }
 };
 
 module.exports = appConfig;
